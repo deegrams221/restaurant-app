@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 export default function RestaurantTable() {
   const [tableState, setTableState] = useState([]);
 
-  // Fetch from the restaurant api
   useEffect(() => {
     axios
       .get(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, {
@@ -22,6 +21,16 @@ export default function RestaurantTable() {
       });
   }, []);
 
+  let sortedTable = tableState.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <>
       <div className='restaurant-table'>
@@ -36,7 +45,7 @@ export default function RestaurantTable() {
             </tr>
           </thead>
           <tbody>
-            {tableState.map((data, i) => {
+            {sortedTable.map((data, i) => {
               return [
                 <tr key={i}>
                   <td>{data.name}</td>
