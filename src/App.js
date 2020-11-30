@@ -16,8 +16,9 @@ function App() {
         },
       })
       .then((data) => {
-        console.log('data:', data);
-        setTableState(data);
+        const tableState = data.data;
+        console.log('data:', tableState);
+        setTableState(tableState);
       })
       .catch((error) => {
         console.log('API currently down:', error);
@@ -27,7 +28,9 @@ function App() {
   return (
     <div className='App'>
       <Header />
-      <RestaurantTable />
+      {tableState.map((data) => {
+        return <RestaurantTable key={data.props} data={data} />;
+      })}
     </div>
   );
 }
