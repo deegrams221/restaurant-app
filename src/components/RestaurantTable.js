@@ -1,11 +1,32 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-export default function RestaurantTable(props) {
+export default function RestaurantTable() {
+  const [tableState, setTableState] = useState([]);
+
+  // Fetch from the restaurant api
+  useEffect(() => {
+    axios
+      .get(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, {
+        headers: {
+          Authorization: `Api-Key q3MNxtfep8Gt`,
+        },
+      })
+      .then((data) => {
+        const tableState = data.data;
+        console.log('data:', tableState);
+        setTableState(tableState);
+      })
+      .catch((error) => {
+        console.log('API currently down:', error);
+      });
+  }, []);
+
   return (
     <>
       <div className='restaurant-table'>
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th>Name</th>
               <th>City</th>
@@ -13,13 +34,19 @@ export default function RestaurantTable(props) {
               <th>Phone Number</th>
               <th>Genre</th>
             </tr>
-            <tr>
-              <th>{props.name}</th>
-              <th>{props.city}</th>
-              <th>{props.state}</th>
-              <th>{props.telephone}</th>
-              <th>{props.genre}</th>
-            </tr>
+          </thead>
+          <tbody>
+            {tableState.map((data, i) => {
+              return [
+                <tr key={i}>
+                  <td>{data.name}</td>
+                  <td>{data.city}</td>
+                  <td>{data.state}</td>
+                  <td>{data.telephone}</td>
+                  <td>{data.genre}</td>
+                </tr>,
+              ];
+            })}
           </tbody>
         </table>
       </div>
