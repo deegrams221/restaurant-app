@@ -71,6 +71,7 @@ export default function RestaurantTable() {
           onChange={handleChange}
           onKeyPress={handleKeypress}
         />
+
         <table>
           <thead>
             <tr>
@@ -95,6 +96,8 @@ export default function RestaurantTable() {
             })}
           </tbody>
         </table>
+        {/* No results found */}
+        {searchTable.length === 0 && <span>No records found to display!</span>}
       </div>
     </>
   );
