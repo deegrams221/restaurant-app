@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react';
 
 export default function RestaurantTable() {
   const [tableState, setTableState] = useState([]);
+  const [search, setSearch] = useState('');
+  const [searchTable, setSearchTable] = useState([]);
 
+  // pull restaurant data from REST API
   useEffect(() => {
     axios
       .get(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, {
@@ -21,6 +24,7 @@ export default function RestaurantTable() {
       });
   }, []);
 
+  // render sorted data alphabetically by name
   let sortedTable = tableState.sort((a, b) => {
     if (a.name < b.name) {
       return -1;
@@ -31,9 +35,42 @@ export default function RestaurantTable() {
     return 0;
   });
 
+  // search by name, city, or genre
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchTable(
+        sortedTable.filter(
+          (items) =>
+            items.name.toLowerCase().includes(search.toLowerCase()) ||
+            items.city.toLowerCase().includes(search.toLowerCase()) ||
+            items.genre.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [search, sortedTable]);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  // hit enter key for search
+  const handleKeypress = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <div className='restaurant-table'>
+        <input
+          id='searchInput'
+          placeholder='Search by name, city, or genre'
+          value={search}
+          onChange={handleChange}
+          onKeyPress={handleKeypress}
+        />
         <table>
           <thead>
             <tr>
@@ -45,7 +82,7 @@ export default function RestaurantTable() {
             </tr>
           </thead>
           <tbody>
-            {sortedTable.map((data, i) => {
+            {searchTable.map((data, i) => {
               return [
                 <tr key={i}>
                   <td>{data.name}</td>
