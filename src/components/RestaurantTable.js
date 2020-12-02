@@ -57,7 +57,7 @@ export default function RestaurantTable() {
   // hit enter key for search
   const handleKeypress = (e) => {
     if (e.keyCode === 13) {
-      e.preventDefault();
+      setSearch(e.target.value);
     }
   };
 
@@ -71,8 +71,7 @@ export default function RestaurantTable() {
           onChange={handleChange}
           onKeyPress={handleKeypress}
         />
-
-        <table>
+        <table align='center' page-length='10'>
           <thead>
             <tr>
               <th>Name</th>
@@ -85,7 +84,7 @@ export default function RestaurantTable() {
           <tbody>
             {searchTable.map((data, i) => {
               return [
-                <tr key={i}>
+                <tr key={i} className='row-class'>
                   <td>{data.name}</td>
                   <td>{data.city}</td>
                   <td>{data.state}</td>
