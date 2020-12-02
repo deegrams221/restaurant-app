@@ -41,6 +41,18 @@
   display: none;
 }
 
+.buttons {
+  margin-top: 1%;
+  margin-right: 20%;
+  float: right;
+}
+
+.buttons > .previous,
+.next {
+  font-size: 18px;
+  margin: 2px;
+}
+
 .restaurant-table > #searchInput {
   min-width: 220px;
 }
