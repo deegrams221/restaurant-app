@@ -16,7 +16,6 @@ export default function RestaurantTable() {
       })
       .then((data) => {
         const tableState = data.data;
-        console.log('data:', tableState);
         setTableState(tableState);
       })
       .catch((error) => {
