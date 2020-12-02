@@ -1,6 +1,6 @@
 # Restaurant App -- Charter Front-End Code Challenge
 
-Find the deployed project at
+Find the deployed project at https://restaurant-table.netlify.app/
 
 ## Diana Grams
 
@@ -10,7 +10,7 @@ Find the deployed project at
 
 ![React](https://img.shields.io/badge/react-v17.0.1-blue.svg)
 [![code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
-![netlify](https://img.shields.io/netlify/60ed14aa-ffc4-4ac0-9f41-c1b60e097554)
+![netlify](https://img.shields.io/netlify/2e27b3eb-701f-42b4-bbc7-369aa7c69a65)
 
 <br>
 
