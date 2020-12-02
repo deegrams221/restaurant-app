@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Buttons from './Buttons';
 
 export default function RestaurantTable() {
   const [tableState, setTableState] = useState([]);
@@ -34,7 +35,7 @@ export default function RestaurantTable() {
     return 0;
   });
 
-  // search by name, city, or genre
+  // search by name, city, state, or genre
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchTable(
@@ -42,6 +43,7 @@ export default function RestaurantTable() {
           (items) =>
             items.name.toLowerCase().includes(search.toLowerCase()) ||
             items.city.toLowerCase().includes(search.toLowerCase()) ||
+            items.state.toLowerCase().includes(search.toLowerCase()) ||
             items.genre.toLowerCase().includes(search.toLowerCase())
         )
       );
@@ -65,12 +67,12 @@ export default function RestaurantTable() {
       <div className='restaurant-table'>
         <input
           id='searchInput'
-          placeholder='Search by name, city, or genre'
+          placeholder='Search by name, city, state, or genre'
           value={search}
           onChange={handleChange}
           onKeyPress={handleKeypress}
         />
-        <table align='center' page-length='10'>
+        <table className='pagination' align='center'>
           <thead>
             <tr>
               <th>Name</th>
@@ -94,6 +96,7 @@ export default function RestaurantTable() {
             })}
           </tbody>
         </table>
+        <Buttons />
         {/* No results found */}
         {searchTable.length === 0 && <span>No records found to display!</span>}
       </div>
