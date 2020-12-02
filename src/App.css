@@ -40,3 +40,7 @@
 .row-class:nth-child(n + 11) {
   display: none;
 }
+
+.restaurant-table > #searchInput {
+  min-width: 220px;
+}
