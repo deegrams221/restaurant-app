@@ -1,28 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Buttons from './Buttons';
 
-export default function RestaurantTable() {
-  const [tableState, setTableState] = useState([]);
+export default function RestaurantTable({ tableState }) {
   const [search, setSearch] = useState('');
   const [searchTable, setSearchTable] = useState([]);
-
-  // pull restaurant data from REST API
-  useEffect(() => {
-    axios
-      .get(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, {
-        headers: {
-          Authorization: `Api-Key q3MNxtfep8Gt`,
-        },
-      })
-      .then((data) => {
-        const tableState = data.data;
-        setTableState(tableState);
-      })
-      .catch((error) => {
-        console.log('API currently down:', error);
-      });
-  }, []);
 
   // render sorted data alphabetically by name
   let sortedTable = tableState.sort((a, b) => {
