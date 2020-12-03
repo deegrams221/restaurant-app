@@ -5,5 +5,6 @@
 }
 
 .restaurant-table > #searchInput {
-  min-width: 220px;
+  min-width: 25%;
+  margin: 10px auto;
 }
