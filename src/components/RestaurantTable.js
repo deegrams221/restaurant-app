@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Buttons from './Buttons';
 
-export default function RestaurantTable({ tableState }) {
+export default function RestaurantTable({ sortedTable }) {
   const [search, setSearch] = useState('');
   const [searchTable, setSearchTable] = useState([]);
-
-  // render sorted data alphabetically by name
-  let sortedTable = tableState.sort((a, b) => {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  });
 
   // search by name, city, state, or genre
   useEffect(() => {
@@ -53,7 +41,7 @@ export default function RestaurantTable({ tableState }) {
           onChange={handleChange}
           onKeyPress={handleKeypress}
         />
-        <table className='pagination' align='center'>
+        <table className='table mt-4'>
           <thead>
             <tr>
               <th>Name</th>
@@ -66,7 +54,7 @@ export default function RestaurantTable({ tableState }) {
           <tbody>
             {searchTable.map((data, i) => {
               return [
-                <tr key={i} className='row-class'>
+                <tr key={i}>
                   <td>{data.name}</td>
                   <td>{data.city}</td>
                   <td>{data.state}</td>
@@ -77,7 +65,6 @@ export default function RestaurantTable({ tableState }) {
             })}
           </tbody>
         </table>
-        <Buttons />
         {/* No results found */}
         {searchTable.length === 0 && <span>No records found to display!</span>}
       </div>
